@@ -1,4 +1,4 @@
 .timer {
-    width: 101px;
-    height: 60px;
+    min-width: 5.26vw;
+    min-height: 3.13vw;
 }

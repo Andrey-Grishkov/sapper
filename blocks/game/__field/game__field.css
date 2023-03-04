@@ -1,9 +1,9 @@
 .game__field {
-    margin: 20px;
-    width: 640px;
-    height: 640px;
+    margin: 1.04vw;
+    width: 33.33vw;
+    height: 33.33vw;
     display: grid;
-    grid-template-columns: repeat(16, 40px);
-    grid-template-rows: repeat(16, 40px);
+    grid-template-columns: repeat(16, 2.08vw);
+    grid-template-rows: repeat(16, 2.08vw);
     border: #7b7b7b 3px solid;
 }

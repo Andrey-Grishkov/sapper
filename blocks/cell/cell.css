@@ -1,9 +1,8 @@
 .cell {
     margin: 0;
     padding: 0;
-    height: 40px;
-    width: 40px;
-    font-size: 32px;
+    height: 2.08vw;
+    width: 2.08vw;
     background: url(../../images/cell.png) 0 0/contain no-repeat;
     border: grey 1px solid;
     cursor: pointer;
