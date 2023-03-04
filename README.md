@@ -1,7 +1,7 @@
 <h2 align="left" style="text-decoration: underline"> Игра «Сапёр» 💣</h2>
 
 <h3 align="left">🌐 Ссылкa на игру</h3>
-<a href="https://movies-explorer-frontend-ruby.vercel.app" style="cursor: pointer">https://movies-explorer-frontend-ruby.vercel.app </a>
+<a href="https://sapper-mu.vercel.app/" style="cursor: pointer">https://sapper-mu.vercel.app/ </a>
 
 <h3 align="left">🙂 Введение</h3>
 Игра запускается по указанной выше ссылке, для локального запуска необходимо слонировать репозиторий в удобное место (git clone) .
@@ -37,7 +37,8 @@
 * Тестирование
 
 <h3 align="left">👨‍🔬  Стек примененных технологий</h3>
-
+<div style="display: flex; flex-direction: row">
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/>
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/>
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/>
+</div>
