@@ -1,12 +1,12 @@
 startGame(16, 16, 40);
 
 //Вытаскиваем кнопку со смайликом
-const smileBtn = document.querySelector('.smile');
+const smileBtn = document.querySelector(".smile");
 
 //Функция запуска игры
 function startGame(WIDTH, HEIGHT, trap) {
   //Создаем поле с ячейками
-  const field = document.querySelector('.game__field');
+  const field = document.querySelector(".game__field");
   const cellsCount = WIDTH * HEIGHT;
   field.innerHTML = '<button class="cell"></button>'.repeat(cellsCount);
   const cells = [...field.children];
@@ -20,7 +20,7 @@ function startGame(WIDTH, HEIGHT, trap) {
   //Создаем массив куда будем складывать ячейки отмеченные вопросом
   let questMass = [];
 
-//____________________________________________________BOMBS__________________________________________________________
+  //____________________________________________________BOMBS__________________________________________________________
   //Минимальное значение диапазона случайных чисел (первый возможный индекс бомбы)
   const min = 0;
 
@@ -29,63 +29,64 @@ function startGame(WIDTH, HEIGHT, trap) {
 
   //Добавляем в коллекцию индексы бомб от min до cellsCount(не включительно, т.к. индексы идут от 0), пока размер
   // коллекции не станет равным trap
-  while(bombsSet.size !== trap) {
-    bombsSet.add(Math.floor(Math.floor(Math.random() * (cellsCount - min)) + min));
+  while (bombsSet.size !== trap) {
+    bombsSet.add(
+      Math.floor(Math.floor(Math.random() * (cellsCount - min)) + min)
+    );
   }
 
   //Создаем пустой массив для бомб
-  let bombs = []
+  let bombs = [];
 
   //Наполняем массив бомбами из коллекции
-  bombsSet.forEach(function(value) {
-   bombs.push(value);
-  })
-//_________________________________________________Listener________________________________________________________
+  bombsSet.forEach(function (value) {
+    bombs.push(value);
+  });
+  //_________________________________________________Listener________________________________________________________
 
-//вешаем слушатель на нажатие на элементы поля
-  field.addEventListener('click', (event) => {
+  //вешаем слушатель на нажатие на элементы поля
+  field.addEventListener("click", (event) => {
     //прерываем функцию, если кликаем не на ячейку
-    if(event.target.tagName !== 'BUTTON') {
-      return
+    if (event.target.tagName !== "BUTTON") {
+      return;
     }
     //Определяем индекс ячейки в которой произошло событие
     const index = cells.indexOf(event.target);
     //Определяем номер колонки, как остаток от деления индекса элемента на ширину таблицы
-    const column = (index) % WIDTH;
+    const column = index % WIDTH;
     //Определяем номер ряда, как округление от деления индекса элемента на ширину таблицы
-    const row = Math.floor((index)/WIDTH);
+    const row = Math.floor(index / WIDTH);
 
     //Открываем выбранную ячейку
     open(row, column);
-  })
+  });
 
   // Обработка правого клика мыши
-  field.oncontextmenu = function(e) {
+  field.oncontextmenu = function (e) {
     e.preventDefault();
-    if(event.target.tagName !== 'BUTTON') {
-      return
+    if (event.target.tagName !== "BUTTON") {
+      return;
     }
     //Определяем индекс ячейки в которой произошло событие
     const index = cells.indexOf(event.target);
     //Определяем номер колонки, как остаток от деления индекса элемента на ширину таблицы
-    const column = (index) % WIDTH;
+    const column = index % WIDTH;
     //Определяем номер ряда, как округление от деления индекса элемента на ширину таблицы
-    const row = Math.floor((index)/WIDTH);
+    const row = Math.floor(index / WIDTH);
     //Создаем метку, что кнопка открыта по правому щелчку мыши
-    const flag = 'right';
+    const flag = "right";
     //Открываем выбранную ячейку
     open(row, column, flag);
-  }
+  };
 
-//__________________________________________________OPEN_______________________________________________________
+  //__________________________________________________OPEN_______________________________________________________
 
   //Открытие ячейки при нажатии
-  function open (row, column, flag) {
-
+  function open(row, column, flag) {
     //Проверяем входит ли колонка и ряд в область таблицы, так как при открытии пустых клеток при рекурсии сюда могут
     // прийти несуществующие колонки и ряды и изменить индекс элемента
     if (!isValid(row, column)) {
-      return
+      return;
     }
 
     //Определям индекс обратным действием: как произведение ряда на длину таблицы и плюс номер колонки
@@ -95,175 +96,194 @@ function startGame(WIDTH, HEIGHT, trap) {
     const cell = cells[index];
 
     //Отрабатывается первое нажатие, когда все клетки закрыты
-    if(closedCells===HEIGHT*WIDTH){
+    if (closedCells === HEIGHT * WIDTH) {
       // Вызываем функцию проверки бомбы, если бомба, то заменяем индекс бомбы, чтобы при первом нажатии не было бомбы
-      if(bombs.includes(index)){
+      if (bombs.includes(index)) {
         let bombIndex = bombs.indexOf(index);
-        bombs.splice(bombIndex, 1)
+        bombs.splice(bombIndex, 1);
         //Если бомба при первом клике, то сдвигаем бомбу на одну клетку, если там уже есть бомба, то на 2 клетки, если
         // и там есть, то на 3 клетки, если там занято - то бомба просто удаляется
-        if(!bombs.includes(index+1)) {
-          bombs.push(index+1);
-        } else if(!bombs.includes(index+2)){
-          bombs.push(index+2);
-        } else if(!bombs.includes(index+3)) {
-          bombs.push(index+3);
+        if (!bombs.includes(index + 1)) {
+          bombs.push(index + 1);
+        } else if (!bombs.includes(index + 2)) {
+          bombs.push(index + 2);
+        } else if (!bombs.includes(index + 3)) {
+          bombs.push(index + 3);
         }
       }
     }
 
     //Если кнопка открыта правым щелчком мыши, то ставим на ней флаг и добавляем индекс в массив флагов
-    if (flag === 'right'){
+    if (flag === "right") {
       //Если на кнопке стоит уже флаг, то ставим вопрос
-      if (flagMass.includes(index) || questMass.includes(index)){
-        if(questMass.includes(index)){
+      if (flagMass.includes(index) || questMass.includes(index)) {
+        if (questMass.includes(index)) {
           //Убираем вопрос из массива вопросов
           let quesIndex = questMass.indexOf(index);
-          questMass.splice(quesIndex, 1)
-          cell.classList.remove('cell_state_quest', 'cell_state_flag');
+          questMass.splice(quesIndex, 1);
+          cell.classList.remove("cell_state_quest", "cell_state_flag");
           //Делаем ячейку кликабельной
           cell.disabled = false;
-          return
+          return;
         }
 
         //Убираем флаг из массива флагов и добавляем вопрос в массив вопросов
         let flagIndex = flagMass.indexOf(index);
-        flagMass.splice(flagIndex, 1)
-        cell.classList.add('cell_state_quest');
+        flagMass.splice(flagIndex, 1);
+        cell.classList.add("cell_state_quest");
         questMass.push(index);
-        return
-      }
-
-      //Если ячейка уже неактивна - прерываем функцию
-      if (cell.disabled === true){
         return;
       }
 
-      cell.classList.add('cell_state_flag');
+      //Если ячейка уже неактивна - прерываем функцию
+      if (cell.disabled === true) {
+        return;
+      }
+
+      cell.classList.add("cell_state_flag");
       flagMass.push(index);
       cell.disabled = true;
-      return
+      return;
     }
 
     //Если ячейка уже неактивна - прерываем функцию
-    if (cell.disabled === true){
+    if (cell.disabled === true) {
       return;
     }
 
     //Делаем ячейку неактивной после нажатия
     cell.disabled = true;
-//____________________________________________________Поражение________________________________________________________
+    //____________________________________________________Поражение________________________________________________________
     //Вставляем значение в выбранную ячейку.
     // Вызываем функцию проверки бомбы, если бомба, то вставляем значек бомбы.
-    if(isBomb(row, column)){
-
+    if (isBomb(row, column)) {
       //Отображаем ячейку как взорвавшиеся бомба
-      cell.classList.add('cell_state_bombed-red');
+      cell.classList.add("cell_state_bombed-red");
 
       //Убираем взорвавшиюся бомбу из массива бомб
       let bombIndex = bombs.indexOf(index);
-      bombs.splice(bombIndex, 1)
+      bombs.splice(bombIndex, 1);
 
       //Останавливаем таймер
       clearInterval(TimeInterval);
 
       //Удаляем слушатель, если попадание в бомбу было с первого раза
-      buttonRun.removeEventListener('click', setTimer);
+      buttonRun.removeEventListener("click", setTimer);
 
       //Открываем остальные бомбы
-      bombs.forEach(bombIndexShow => {
+      bombs.forEach((bombIndexShow) => {
         //Если бомба была отмечена флажком или вопросом, то ставим там значек с зачеркнутой бомбой
-        if (flagMass.includes(bombIndexShow) || questMass.includes(bombIndexShow)){
-          cells[bombIndexShow].classList.remove('cell_state_quest', 'cell_state_flag');
-          cells[bombIndexShow].classList.add('cell_state_bombed-err');
+        if (
+          flagMass.includes(bombIndexShow) ||
+          questMass.includes(bombIndexShow)
+        ) {
+          cells[bombIndexShow].classList.remove(
+            "cell_state_quest",
+            "cell_state_flag"
+          );
+          cells[bombIndexShow].classList.add("cell_state_bombed-err");
         } else {
-          cells[bombIndexShow].classList.add('cell_state_bombed');
+          cells[bombIndexShow].classList.add("cell_state_bombed");
         }
-        })
+      });
       //Блокируем все поле
       flagMass = [];
       questMass = [];
-      cells.forEach(cell => cell.disabled = true)
-      smileBtn.classList.add('smile_state_lose');
-      return
+      cells.forEach((cell) => (cell.disabled = true));
+      smileBtn.classList.add("smile_state_lose");
+      return;
     }
-//_____________________________________________________________________________________________________________________
+    //_____________________________________________________________________________________________________________________
 
     //Уменьшаем счетчик закрытых ячеек
     closedCells--;
 
-//_____________________________________________ПОБЕДА___________________________________________________________________
+    //_____________________________________________ПОБЕДА___________________________________________________________________
     //Если закрытых ячеек меньше или равно количеству бомб, то пользователь выиграл
-    if(closedCells<=trap){
-      smileBtn.classList.add('smile_state_win');
-      console.log('you win')
+    if (closedCells <= trap) {
+      smileBtn.classList.add("smile_state_win");
+      console.log("you win");
 
       //Останавливаем таймер
       clearInterval(TimeInterval);
 
       //Удаляем слушатель, если выиграли с первого нажатия
-      buttonRun.removeEventListener('click', setTimer);
+      buttonRun.removeEventListener("click", setTimer);
 
       //Открываем остальные бомбы
-      bombs.forEach(bombIndexShow => {
+      bombs.forEach((bombIndexShow) => {
         //Если бомба была отмечена флажком или вопросом, то ставим там значек с зачеркнутой бомбой
-        if (flagMass.includes(bombIndexShow) || questMass.includes(bombIndexShow)){
-          cells[bombIndexShow].classList.remove('cell_state_quest', 'cell_state_flag');
-          cells[bombIndexShow].classList.add('cell_state_bombed-err');
+        if (
+          flagMass.includes(bombIndexShow) ||
+          questMass.includes(bombIndexShow)
+        ) {
+          cells[bombIndexShow].classList.remove(
+            "cell_state_quest",
+            "cell_state_flag"
+          );
+          cells[bombIndexShow].classList.add("cell_state_bombed-err");
         } else {
-          cells[bombIndexShow].classList.add('cell_state_bombed');
+          cells[bombIndexShow].classList.add("cell_state_bombed");
         }
-      })
+      });
       //Блокируем все поле
-      cells.forEach(cell => cell.disabled = true)
+      cells.forEach((cell) => (cell.disabled = true));
     }
-//______________________________________________________________________________________________________________________
-
+    //______________________________________________________________________________________________________________________
 
     //если бомбы в ячейке нет, вызываем функцию проверки бомб по соседству от выбранной ячейки, которая возвращаяет
     // кол-во бомб вокруг ячейки.
     const count = getCount(row, column);
 
     //если вокруг ячейки есть бомбы, то вписываем в ячейку кол-во соседних бомб
-    if(count !== 0){
-      switch (count){
-        case 8: cell.classList.add('cell_state_geted-eight');
+    if (count !== 0) {
+      switch (count) {
+        case 8:
+          cell.classList.add("cell_state_geted-eight");
           break;
-        case 7: cell.classList.add('cell_state_geted-seven');
+        case 7:
+          cell.classList.add("cell_state_geted-seven");
           break;
-        case 6: cell.classList.add('cell_state_geted-six');
+        case 6:
+          cell.classList.add("cell_state_geted-six");
           break;
-        case 5: cell.classList.add('cell_state_geted-five');
+        case 5:
+          cell.classList.add("cell_state_geted-five");
           break;
-        case 4: cell.classList.add('cell_state_geted-four');
+        case 4:
+          cell.classList.add("cell_state_geted-four");
           break;
-        case 3: cell.classList.add('cell_state_geted-three');
+        case 3:
+          cell.classList.add("cell_state_geted-three");
           break;
-        case 2: cell.classList.add('cell_state_geted-two');
+        case 2:
+          cell.classList.add("cell_state_geted-two");
           break;
-        case 1: cell.classList.add('cell_state_geted-one');
+        case 1:
+          cell.classList.add("cell_state_geted-one");
           break;
-        default: cell.classList.add('cell_state_disabled');
+        default:
+          cell.classList.add("cell_state_disabled");
       }
       return;
     }
 
     //если вокруг ячейки нет бомб, то открываем соседние ячейки до ячееек у которых есть по соседству бомбы
-    cell.classList.add('cell_state_disabled');
+    cell.classList.add("cell_state_disabled");
 
-    for (let i = -1; i <= 1; i++)  {
+    for (let i = -1; i <= 1; i++) {
       for (let j = -1; j <= 1; j++) {
         open(row + j, column + i);
       }
     }
   }
 
-//_____________________________________________________isBomb________________________________________________________
+  //_____________________________________________________isBomb________________________________________________________
   //Функция прверки бомбы
   function isBomb(row, column) {
     //Проверяем входит ли колонка или ряд в область таблицы, так как из getCount могут прилетать ряды и колонки,
     // выходящие за край таблицы
-    if(! isValid(row, column)){
+    if (!isValid(row, column)) {
       return false;
     }
     //Определям индекс обратным действием: как произведение ряда на длину таблицы и плюс номер колонки
@@ -273,22 +293,19 @@ function startGame(WIDTH, HEIGHT, trap) {
   }
 
   //Проверка Валидности: колонки и строки не выходят за пределы поля
-  function isValid(row, column){
-    return row >=0 &&
-      row < HEIGHT &&
-      column >=0 &&
-      column < WIDTH
+  function isValid(row, column) {
+    return row >= 0 && row < HEIGHT && column >= 0 && column < WIDTH;
   }
 
-//______________________________________________________getCount______________________________________________________
+  //______________________________________________________getCount______________________________________________________
   //Функция проверки соседних ячеек на наличие бомб
   function getCount(row, column) {
     //Задаем счетчик бомб
     let count = 0;
     //Запускаем цикл проверки соседних колонок
-    for (let i = column-1; i <= column+1; i++) {
+    for (let i = column - 1; i <= column + 1; i++) {
       //Запускаем цикл проверки соседних рядов (перемещаемся по рядам одной колонки, потом по рядам другой и т.д.)
-      for (let j = row-1; j <= row+1; j++) {
+      for (let j = row - 1; j <= row + 1; j++) {
         //Проверяем, есть ли бомба в соседней ячейке, если есть увеличиваем счетчик бомб
         if (isBomb(j, i)) {
           count++;

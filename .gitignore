@@ -42,3 +42,7 @@ yarn-error.log*
 
 #справочные материалы с командами
 text.txt
+
+#преттиер
+package.json
+package-lock.json
