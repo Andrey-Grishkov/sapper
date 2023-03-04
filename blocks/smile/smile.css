@@ -1,0 +1,6 @@
+.smile {
+    width: 65px;
+    height: 65px;
+    background: url(../../images/smile.png) 0 0/contain no-repeat;
+    cursor: pointer;
+}

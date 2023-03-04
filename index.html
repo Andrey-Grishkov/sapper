@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<link rel="stylesheet" href="pages/index.css">
+<head>
+  <meta charset="UTF-8">
+  <title>Сапёр</title>
+  <link rel="icon" href="images/bomb.png"></link>
+</head>
+<body class="page">
+<header class="header">
+  <h1 class="header__title">Сапёр</h1>
+</header>
+<section class="game">
+  <div class="game__timer-container">
+    <div class="timer">
+      <ul class="timer__container">
+        <li class="timer__value timer__value_set_zero"></li>
+        <li class="timer__value timer__value_set_four timer__min-value_after_ten"></li>
+        <li class="timer__value timer__value_set_zero timer__min-value_before_ten"></li>
+      </ul>
+    </div>
+    <div class="smile" id="smileButton"></div>
+    <div class="timer">
+      <ul class="timer__container">
+        <li class="timer__value timer__value_set_zero"></li>
+        <li class="timer__value timer__value_set_zero timer__sec-value_after_ten"></li>
+        <li class="timer__value timer__value_set_zero timer__sec-value_before_ten"></li>
+      </ul>
+    </div>
+  </div>
+  <div class="game__field"></div>
+</section>
+<script src="index.js"></script>
+</body>
+</html>

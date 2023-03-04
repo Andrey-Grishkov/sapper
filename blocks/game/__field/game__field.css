@@ -1,0 +1,9 @@
+.game__field {
+    margin: 20px;
+    width: 640px;
+    height: 640px;
+    display: grid;
+    grid-template-columns: repeat(16, 40px);
+    grid-template-rows: repeat(16, 40px);
+    border: #7b7b7b 3px solid;
+}

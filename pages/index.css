@@ -1,0 +1,41 @@
+@import url(../blocks/page/page.css);
+
+@import url(../blocks/header/__title/header__title.css);
+
+@import url(../blocks/game/game.css);
+@import url(../blocks/game/__timer-container/game__timer-container.css);
+@import url(../blocks/game/__field/game__field.css);
+
+@import url(../blocks/timer/timer.css);
+@import url(../blocks/timer/__container/timer__container.css);
+@import url(../blocks/timer/__value/timer__value.css);
+@import url(../blocks/timer/__value/_set/timer__value_set_zero.css);
+@import url(../blocks/timer/__value/_set/timer__value_set_one.css);
+@import url(../blocks/timer/__value/_set/timer__value_set_two.css);
+@import url(../blocks/timer/__value/_set/timer__value_set_three.css);
+@import url(../blocks/timer/__value/_set/timer__value_set_four.css);
+@import url(../blocks/timer/__value/_set/timer__value_set_five.css);
+@import url(../blocks/timer/__value/_set/timer__value_set_six.css);
+@import url(../blocks/timer/__value/_set/timer__value_set_seven.css);
+@import url(../blocks/timer/__value/_set/timer__value_set_eight.css);
+@import url(../blocks/timer/__value/_set/timer__value_set_nine.css);
+
+@import url(../blocks/smile/smile.css);
+@import url(../blocks/smile/_state/smile_state_win.css);
+@import url(../blocks/smile/_state/smile_state_lose.css);
+
+@import url(../blocks/cell/cell.css);
+@import url(../blocks/cell/_state/cell_state_bombed.css);
+@import url(../blocks/cell/_state/cell_state_bombed-red.css);
+@import url(../blocks/cell/_state/cell_state_bombed-err.css);
+@import url(../blocks/cell/_state/cell_state_flag.css);
+@import url(../blocks/cell/_state/cell_state_quest.css);
+@import url(../blocks/cell/_state/cell_state_disabled.css);
+@import url(../blocks/cell/_state/cell_state_geted-eight.css);
+@import url(../blocks/cell/_state/cell_state_geted-seven.css);
+@import url(../blocks/cell/_state/cell_state_geted-six.css);
+@import url(../blocks/cell/_state/cell_state_geted-five.css);
+@import url(../blocks/cell/_state/cell_state_geted-four.css);
+@import url(../blocks/cell/_state/cell_state_geted-three.css);
+@import url(../blocks/cell/_state/cell_state_geted-two.css);
+@import url(../blocks/cell/_state/cell_state_geted-one.css);
