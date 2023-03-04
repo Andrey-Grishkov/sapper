@@ -1,0 +1,7 @@
+.footer {
+    margin-top: 0.56vw;
+    height: 1.56vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

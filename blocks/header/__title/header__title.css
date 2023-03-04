@@ -1,3 +1,6 @@
 .header__title {
-    font-size: 2.08vw;
+    margin-top: .5vw;
+    margin-bottom: .5vw;
+    font-size: 1.58vw;
+    color: #7b7b7b;
 }
